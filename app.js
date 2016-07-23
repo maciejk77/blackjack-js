@@ -6,19 +6,15 @@
 // Not DRY - repetion in if statement 'result' and switch refactored a bit
 // To be rewritten in construcor function, prototype methods or some JS pattern
 
+var Game = function(name) {
+  this.result = 0;
+  this.name = name;
+}
+
 var cards = [2,3,4,5,6,7,8,9,10,'J','Q','K','A'];
 var colours = ['S', 'C', 'H', 'D']; // Spades, Clubs, Hearts, Diamonds
 var deck = [];
 var result = 0;
-
-// Initialize a deck of cards
-getDeck(cards, colours);
-// Shuffle cards
-shuffleCards(deck);
-
-// First to random cards dealt by the Dealer
-dealACard(deck);
-dealACard(deck);
 
 
 // Return deck of cards based on cards and colours array
@@ -44,21 +40,35 @@ function shuffleCards(cards) {
 }
 
 // Get the last card from deck and remove that card from deck 
-function dealACard(deck) {
+Game.prototype.hit = function(deck) {
 
   var card = deck.pop();
   var dealtCard = checkValueOf(card);
 
-  result += dealtCard;
+  if(dealtCard === 11 && this.result > 10 ) { dealtCard = 1; }
+  this.result = this.result + dealtCard;
 
-  if(result < 21) {
-    console.log(result + ' is the current result'); // to be removed
-  } else if(result === 21) {
-    console.log(result + ' is the Blackjack!');
+  if(this.result < 21) {
+    console.log(this.name + ' got ' + this.result + ' points in total'); // to be removed
+  } else if(this.result === 21) {
+    console.log(this.name + ' got ' + this.result + ' a Blackjack!!');
   } else {
-    console.log(result + ' ...this is over 21, GAME OVER!!'); // to be removed
+    console.log(this.name + ' got ' + this.result + ' points, that is GAME OVER!!'); // to be removed
   }
 
+}
+
+var player = new Game('Player');
+var dealer = new Game('Dealer');
+
+function startGame() {
+  // Initialize a deck of cards
+  getDeck(cards, colours);
+  // Shuffle cards
+  shuffleCards(deck);
+  player.hit(deck);
+  dealer.hit(deck);
+  player.hit(deck); 
 }
 
 // Return the points value of a given card
@@ -74,7 +84,7 @@ function checkValueOf(card) {
         return 10;
         break;
     case 'A':
-        return result < 21 ? 11 : 1; // fixed logic for the moment
+        return 11; // fixed logic for the moment
         break;
     default:
         return el;
@@ -82,3 +92,4 @@ function checkValueOf(card) {
 
 };
 
+startGame();
