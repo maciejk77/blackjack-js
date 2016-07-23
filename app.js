@@ -13,6 +13,13 @@ var result = 0;
 
 // Initialize a deck of cards
 getDeck(cards, colours);
+// Shuffle cards
+shuffleCards(deck);
+
+// First to random cards dealt by the Dealer
+dealACard(deck);
+dealACard(deck);
+
 
 // Return deck of cards based on cards and colours array
 function getDeck(cards, colours) {
