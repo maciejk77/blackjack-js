@@ -15,7 +15,9 @@ var cards = [2,3,4,5,6,7,8,9,10,'J','Q','K','A'];
 var colours = ['S', 'C', 'H', 'D']; // Spades, Clubs, Hearts, Diamonds
 var deck = [];
 var result = 0;
-
+var hitButton = document.querySelector(".js-hit");
+var stickButton = document.querySelector(".js-stick");
+// var newgameButton = document.querySelector(".js-newgame");
 
 // Return deck of cards based on cards and colours array
 function getDeck(cards, colours) {
@@ -52,8 +54,12 @@ Game.prototype.hit = function(deck) {
     console.log(this.name + ' got ' + this.result + ' points in total'); // to be removed
   } else if(this.result === 21) {
     console.log(this.name + ' got ' + this.result + ' a Blackjack!!');
+    hitButton.disabled = true;
+    stickButton.disabled = true;
   } else {
     console.log(this.name + ' got ' + this.result + ' points, that is GAME OVER!!'); // to be removed
+    hitButton.disabled = true;
+    stickButton.disabled = true;
   }
 
 }
@@ -66,6 +72,7 @@ function startGame() {
   getDeck(cards, colours);
   // Shuffle cards
   shuffleCards(deck);
+  
   player.hit(deck);
   dealer.hit(deck);
   player.hit(deck); 
@@ -93,3 +100,24 @@ function checkValueOf(card) {
 };
 
 startGame();
+
+function hitAction() {
+  player.hit(deck);
+};
+
+function stickAction() {
+  dealer.hit(deck);
+};
+
+// function newgameAction() {
+//   dealer.result = 0;
+//   player.result = 0;
+//   hitButton.disabled = false;
+//   stickButton.disabled = false;
+//   startGame();
+// };
+
+
+hitButton.addEventListener('click', hitAction, false);
+stickButton.addEventListener('click', stickAction, false);
+// newgameButton.addEventListener('click', newgameAction, false);
