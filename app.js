@@ -7,10 +7,12 @@ var cards = [2,3,4,5,6,7,8,9,10,'J','Q','K','A'];
 var colours = ['S', 'C', 'H', 'D']; // Spades, Clubs, Hearts, Diamonds
 var deck = [];
 var result = 0;
-var hitButton = document.querySelector(".js-hit");
-var stickButton = document.querySelector(".js-stick");
-var resetButton = document.querySelector(".js-reset");
-var textEl = document.querySelector(".js-msg");
+var hitButton = document.querySelector('.js-hit');
+var stickButton = document.querySelector('.js-stick');
+var resetButton = document.querySelector('.js-reset');
+var textEl = document.querySelector('.js-msg');
+var winnerEl = document.querySelector('.js-display');
+
 
 var Game = function(name) {
   this.result = 0;
@@ -18,8 +20,8 @@ var Game = function(name) {
 }
 
 // Initialization of two players
-var player = new Game('Player');
-var dealer = new Game('Dealer');
+var player = new Game('PLAYER');
+var dealer = new Game('DEALER');
 
 // Get the last card from deck and remove that card from deck 
 Game.prototype.hit = function(deck) {
@@ -31,17 +33,18 @@ Game.prototype.hit = function(deck) {
   this.result = this.result + dealtCard;
 
   if(this.result < 21) {
-    textEl.innerHTML = (this.name + ' got ' + this.result + ' points in total'); 
-    console.log(this.name + ' got ' + this.result + ' points in total'); // to be removed
+    textEl.innerHTML = (this.name + '\'s last card is (' + card + ') - ' + this.result + ' points in total'); 
+    console.log(this.name + ' got (' + card + ') - ' + this.result + ' points in total'); // to be removed
 
   } else if(this.result === 21) {
       textEl.innerHTML = (this.name + ' got ' + this.result + ' points, a Blackjack!!');
       console.log(this.name + ' got ' + this.result + ' a Blackjack!!'); // to be removed
+      this.name === 'PLAYER' ? winnerEl.innerHTML = this.name + ' WINS' : winnerEl.innerHTML = this.name + ' LOSES';
       disableButtons();
 
   } else {
-      textEl.innerHTML = (this.name + ' got ' + this.result + ' points, ...GAME OVER!!');
-      console.log(this.name + ' got ' + this.result + ' points ...GAME OVER!!'); // to be removed
+      textEl.innerHTML = (this.name + ' got ' + this.result + ' points, GAME OVER!!');
+      console.log(this.name + ' got ' + this.result + ' points GAME OVER!!'); // to be removed
       disableButtons();
   }
 
@@ -99,7 +102,7 @@ function shuffle(cards) {
 function hitAction() {
   if(player.result <= 21) {
     player.hit(deck);
-    player.result >= 21 ? getWinner() : console.log('--- Player still in game, ' + player.result + ' points ----'); 
+    player.result >= 21 ? getWinner() : console.log('--- Player still in the game, ' + player.result + ' points ----'); 
   }   
 };
 
@@ -116,11 +119,14 @@ function getWinner() {
   dealer.result > 21 ? dealer.result = 0 : dealer.result;
   
   if(player.result > dealer.result) {
-    console.log('PLAYER wins');
+    winnerEl.innerHTML = 'PLAYER WINS';
+    console.log('PLAYER WINS');
   } else if(player.result < dealer.result) {
-    console.log('DEALER wins');
+    winnerEl.innerHTML = 'PLAYER LOSES';
+    console.log('PLAYER LOSES');
   } else {
-    console.log('DRAW!');
+    winnerEl.innerHTML = 'DRAW!';
+    console.log('DRAW');
   }
 };
 
@@ -131,6 +137,7 @@ function resetAction() {
   stickButton.disabled = false;
   deck = [];
   startGame();
+  winnerEl.innerHTML = '';
 };
 
 

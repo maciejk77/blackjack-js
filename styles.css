@@ -2,7 +2,7 @@
   display: inline;
 }
 
-.layout-msg {
+.layout-msg, .layout-display {
   margin: 10px 0 10px 10px;
   font-size: 13px;
   font-family: Verdana;
