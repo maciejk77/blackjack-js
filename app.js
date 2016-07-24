@@ -1,10 +1,7 @@
 // Basic game engine
 // Assumptions: 
 // 1 player, 1 deck of cards
-// Just a result counter, no option to stop based on result
 // Logic around Ace is to add 11 if sum below 21 otherwise 1
-// Not DRY - repetion in if statement 'result' and switch refactored a bit
-// To be rewritten in construcor function, prototype methods or some JS pattern
 
 var Game = function(name) {
   this.result = 0;
@@ -15,6 +12,9 @@ var cards = [2,3,4,5,6,7,8,9,10,'J','Q','K','A'];
 var colours = ['S', 'C', 'H', 'D']; // Spades, Clubs, Hearts, Diamonds
 var deck = [];
 var result = 0;
+var hitButton = document.querySelector(".js-hit");
+var stickButton = document.querySelector(".js-stick");
+// var newgameButton = document.querySelector(".js-reset");
 
 
 // Return deck of cards based on cards and colours array
@@ -52,8 +52,12 @@ Game.prototype.hit = function(deck) {
     console.log(this.name + ' got ' + this.result + ' points in total'); // to be removed
   } else if(this.result === 21) {
     console.log(this.name + ' got ' + this.result + ' a Blackjack!!');
+    hitButton.disabled = true;
+    stickButton.disabled = true;
   } else {
     console.log(this.name + ' got ' + this.result + ' points, that is GAME OVER!!'); // to be removed
+    hitButton.disabled = true;
+    stickButton.disabled = true;
   }
 
 }
@@ -93,3 +97,15 @@ function checkValueOf(card) {
 };
 
 startGame();
+
+function hitAction() {
+  player.hit(deck);
+};
+
+function stickAction() {
+  dealer.hit(deck);
+};
+
+hitButton.addEventListener('click', hitAction, false);
+stickButton.addEventListener('click', stickAction, false);
+// newgameButton.addEventListener('click', reset, false);
