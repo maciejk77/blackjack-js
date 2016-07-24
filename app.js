@@ -40,6 +40,7 @@ Game.prototype.hit = function(deck) {
       textEl.innerHTML = (this.name + ' got ' + this.result + ' points, a Blackjack!!');
       console.log(this.name + ' got ' + this.result + ' a Blackjack!!'); // to be removed
       this.name === 'PLAYER' ? winnerEl.innerHTML = this.name + ' WINS' : winnerEl.innerHTML = this.name + ' LOSES';
+      this.name === 'PLAYER' ? winnerEl.classList.add('alert-success') : winnerEl.classList.add('alert-danger');
       disableButtons();
 
   } else {
@@ -120,12 +121,17 @@ function getWinner() {
   
   if(player.result > dealer.result) {
     winnerEl.innerHTML = 'PLAYER WINS';
-    console.log('PLAYER WINS');
+    winnerEl.classList.add('alert-success');
+    console.log('WIN');
+
   } else if(player.result < dealer.result) {
     winnerEl.innerHTML = 'PLAYER LOSES';
-    console.log('PLAYER LOSES');
+    winnerEl.classList.add('alert-danger');
+    console.log('LOSS');
+
   } else {
-    winnerEl.innerHTML = 'DRAW!';
+    winnerEl.innerHTML = 'DRAW';
+    winnerEl.classList.add('alert-info');
     console.log('DRAW');
   }
 };
@@ -136,8 +142,12 @@ function resetAction() {
   hitButton.disabled = false;
   stickButton.disabled = false;
   deck = [];
-  startGame();
   winnerEl.innerHTML = '';
+  winnerEl.classList.remove('alert-success');
+  winnerEl.classList.remove('alert-info');
+  winnerEl.classList.remove('alert-danger');
+  startGame();
+
 };
 
 

@@ -1,16 +1,23 @@
-.layout-btn {
+.layout {
+  margin-left: 60px;
+}
+
+.layout__button {
   display: inline;
 }
 
-.layout-msg, .layout-display {
+.layout__message, 
+.layout__display {
   margin: 10px 0 10px 10px;
   font-size: 13px;
   font-family: Verdana;
+  text-align: center;
+  width: 400px;
 }
 
 /* Base button styles - shared by all buttons */
 .button {
-  margin: 10px 0 5px 10px;
+  margin: 10px 0 5px 15px;
   padding: 15px;
   border: 1px solid black;
   border-radius: 4px;
@@ -29,4 +36,10 @@
 .reset-button {
   background-color: white;
   text-transform: uppercase;
+}
+
+.alert-danger, 
+.alert-success,
+.alert-info {
+  padding: 10px 0;
 }
