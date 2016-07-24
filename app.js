@@ -33,12 +33,14 @@ Game.prototype.hit = function(deck) {
   if(this.result < 21) {
     textEl.innerHTML = (this.name + ' got ' + this.result + ' points in total'); 
     console.log(this.name + ' got ' + this.result + ' points in total'); // to be removed
+
   } else if(this.result === 21) {
-      textEl.innerHTML = (this.name + ' got ' + this.result + ' a Blackjack!!');
+      textEl.innerHTML = (this.name + ' got ' + this.result + ' points, a Blackjack!!');
       console.log(this.name + ' got ' + this.result + ' a Blackjack!!'); // to be removed
       disableButtons();
+
   } else {
-      textEl.innerHTML = (this.name + ' got ' + this.result + ' points ...GAME OVER!!');
+      textEl.innerHTML = (this.name + ' got ' + this.result + ' points, ...GAME OVER!!');
       console.log(this.name + ' got ' + this.result + ' points ...GAME OVER!!'); // to be removed
       disableButtons();
   }
@@ -81,7 +83,7 @@ function getDeck(cards, colours) {
 }
 
 // Shuffling cards in the array of cards provided
-function shuffleCards(cards) {
+function shuffle(cards) {
 
   var j, x, i;
   for (i = cards.length; i; i--) {
@@ -95,15 +97,13 @@ function shuffleCards(cards) {
 
 
 function hitAction() {
-  // An attempt to create automated dealer after reaching 17 points
-  // player.hit(deck);
-  // if(dealer.result > 17) {
+  if(player.result <= 21) {
     player.hit(deck);
-  // }
+    player.result >= 21 ? getWinner() : console.log('--- Player still in game, ' + player.result + ' points ----'); 
+  }   
 };
 
 function stickAction() {
-  // An attempt to create automated dealer after reaching 17 points
   disableButtons();
   while(dealer.result <= 17) {
     dealer.hit(deck);
@@ -136,7 +136,7 @@ function resetAction() {
 
 function startGame() {
   getDeck(cards, colours);
-  shuffleCards(deck);
+  shuffle(deck);
   
   //Deal 2 cards to the Player and one to the Dealer
   player.hit(deck);
