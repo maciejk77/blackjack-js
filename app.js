@@ -1,10 +1,7 @@
 // Basic game engine
 // Assumptions: 
 // 1 player, 1 deck of cards
-// Just a result counter, no option to stop based on result
 // Logic around Ace is to add 11 if sum below 21 otherwise 1
-// Not DRY - repetion in if statement 'result' and switch refactored a bit
-// To be rewritten in construcor function, prototype methods or some JS pattern
 
 var Game = function(name) {
   this.result = 0;
