@@ -14,7 +14,8 @@ var deck = [];
 var result = 0;
 var hitButton = document.querySelector(".js-hit");
 var stickButton = document.querySelector(".js-stick");
-// var newgameButton = document.querySelector(".js-newgame");
+//var resetButton = document.querySelector(".js-reset");
+
 
 // Return deck of cards based on cards and colours array
 function getDeck(cards, colours) {
@@ -114,7 +115,7 @@ function stickAction() {
 //   startGame();
 // };
 
-
 hitButton.addEventListener('click', hitAction, false);
 stickButton.addEventListener('click', stickAction, false);
-// newgameButton.addEventListener('click', newgameAction, false);
+// resetButton.addEventListener('click', reset, false);
+
