@@ -38,8 +38,8 @@ Game.prototype.hit = function(deck) {
       console.log(this.name + ' got ' + this.result + ' a Blackjack!!'); // to be removed
       disableButtons();
   } else {
-      textEl.innerHTML = (this.name + ' got ' + this.result + ' points, that is GAME OVER!!');
-      console.log(this.name + ' got ' + this.result + ' points, that is GAME OVER!!'); // to be removed
+      textEl.innerHTML = (this.name + ' got ' + this.result + ' points ...GAME OVER!!');
+      console.log(this.name + ' got ' + this.result + ' points ...GAME OVER!!'); // to be removed
       disableButtons();
   }
 
@@ -104,10 +104,24 @@ function hitAction() {
 
 function stickAction() {
   // An attempt to create automated dealer after reaching 17 points
-  // while(dealer.result <= 17) {
+  disableButtons();
+  while(dealer.result <= 17) {
     dealer.hit(deck);
-  // }
+  }
+  getWinner();
+};
 
+function getWinner() {
+  player.result > 21 ? player.result = 0 : player.result;
+  dealer.result > 21 ? dealer.result = 0 : dealer.result;
+  
+  if(player.result > dealer.result) {
+    console.log('PLAYER wins');
+  } else if(player.result < dealer.result) {
+    console.log('DEALER wins');
+  } else {
+    console.log('DRAW!');
+  }
 };
 
 function resetAction() {
