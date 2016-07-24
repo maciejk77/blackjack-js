@@ -13,7 +13,6 @@ var resetButton = document.querySelector('.js-reset');
 var textEl = document.querySelector('.js-msg');
 var winnerEl = document.querySelector('.js-display');
 
-
 var Game = function(name) {
   this.result = 0;
   this.name = name;
@@ -44,8 +43,8 @@ Game.prototype.hit = function(deck) {
       disableButtons();
 
   } else {
-      textEl.innerHTML = (this.name + ' got ' + this.result + ' points, GAME OVER!!');
-      console.log(this.name + ' got ' + this.result + ' points GAME OVER!!'); // to be removed
+      textEl.innerHTML = (this.name + ' got ' + this.result + ' points, BUST!');
+      console.log(this.name + ' got ' + this.result + ' points, BUST!'); // to be removed
       disableButtons();
   }
 
@@ -99,7 +98,6 @@ function shuffle(cards) {
 
 }
 
-
 function hitAction() {
   if(player.result <= 21) {
     player.hit(deck);
@@ -143,24 +141,23 @@ function resetAction() {
   stickButton.disabled = false;
   deck = [];
   winnerEl.innerHTML = '';
-  winnerEl.classList.remove('alert-success');
-  winnerEl.classList.remove('alert-info');
-  winnerEl.classList.remove('alert-danger');
-  startGame();
 
+  var btpClasses = ['alert-success', 'alert-info', 'alert-danger'];
+  btpClasses.forEach(function(btpClass) {  
+    winnerEl.classList.remove(btpClass);
+  });
+  
+  startGame();
 };
 
-
 function startGame() {
+  // Get a deck of cards, shuffle and deal 2 cards to the Player and one to the Dealer
   getDeck(cards, colours);
   shuffle(deck);
-  
-  //Deal 2 cards to the Player and one to the Dealer
   player.hit(deck);
   dealer.hit(deck);
   player.hit(deck); 
 }
-
 
 // Event listeners for Hit, Stick and Reset buttons
 hitButton.addEventListener('click', hitAction, false);
