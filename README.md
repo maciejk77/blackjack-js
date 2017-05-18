@@ -1,21 +1,21 @@
-#Blackjack game in JavaScript
+# Blackjack game in JavaScript
 
 The purpose of this exercise is to create blackjack game engine in vanilla JavaScript.
 
-##Instruction
+## Instruction
 
 - Clone this repo ```git clone``` and check into the folder 
 - Run ```open index.html``` for Mac or ```start index.html``` for Win to see JS app
 
-###To be done
+### To be done
 
 - to display card from img/cards.png as they are dealt by computer
 
-####Preview
+#### Preview
 
 ![sass-js-coding-test screenshot](https://github.com/maciejk77/blackjack-js/blob/master/img/screenshot.png?raw=true)
 
-##The Blackjack game requirements and rules
+## The Blackjack game requirements and rules
 
 Blackjack is a game of cards using a standard deck of cards of 4 suits (Hearts, Diamonds, Clubs and Spades), each of which has the following cards (2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, Ace), and a Deck of cards consists of one of each combination (2 of Hearts, 2 of Diamonds, 2 of Clubs, etc).
 
@@ -35,7 +35,7 @@ The object of the game is to beat the dealer, which can be done in a number of w
 - The dealer loses if he or she busts or has a lesser hand than the player who has not busted.
 - If the player and dealer have the same total, this is called a "push", this is classed as a draw.
 
-##Clicking New Game, should
+## Clicking New Game, should
 
 - Reset from any previous game
 - Shuffle the Deck of 52 cards
